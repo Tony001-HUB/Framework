@@ -14,7 +14,7 @@ public class Tests extends CommonConditions
     //chcp 1251
 
 
-    @Test(priority = 1)
+    //@Test(priority = 1)
     public void registrationWithLowLimitSymbols()
     {
         User userWithInvalidPassword = UserCreator.WithLowLimitSymbols();
