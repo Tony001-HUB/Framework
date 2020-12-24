@@ -16,6 +16,6 @@ public class UserCreator {
     }
 
     public static User InvalidPassword(){
-    return new User(TestDataReader.getTestData(TESTDATA_USER_REGISTRATIONEMAIL), TestDataReader.getTestData(TESTDATA_USER_LASTNAME));
+    return new User(TestDataReader.getTestData(TESTDATA_USER_REGISTRATIONEMAIL), TestDataReader.getTestData(TESTDATA_USER_PASSWORD));
     }
 }

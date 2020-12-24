@@ -1,0 +1,9 @@
+tests\CommonConditions.class
+page\RegistrationPage.class
+service\UserCreator.class
+page\LoginPage.class
+tests\Tests.class
+util\TestListener.class
+service\TestDataReader.class
+driver\DriverSingleton.class
+model\User.class

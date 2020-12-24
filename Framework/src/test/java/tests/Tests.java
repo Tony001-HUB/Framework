@@ -13,8 +13,7 @@ public class Tests extends CommonConditions
     //mvn -Dbrowser=chrome -Denvironment=InvalidPassword -Dsurefire.suiteXmlFiles=src\test\resources\testng-all clean test
     //chcp 1251
 
-
-    @Test(priority = 1)
+    //@Test(priority = 1)
     public void registrationWithLowLimitSymbols()
     {
         User userWithInvalidPassword = UserCreator.WithLowLimitSymbols();
@@ -24,7 +23,7 @@ public class Tests extends CommonConditions
         .checkErrorMessage();
     }
 
-    @Test(priority = 2)
+    @Test
     public void failedLogin()
     {
         User userInvalidPassword = UserCreator.InvalidPassword();

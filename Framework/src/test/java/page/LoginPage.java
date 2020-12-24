@@ -27,8 +27,11 @@ public class LoginPage {
     @FindBy(id = "gcid-email-signin-text")
     private WebElement buttonTypeOfLogin;
 
-    @FindBy(id = "gcid-error-text")
+    @FindBy(xpath = "//*[@id=\"gcid-error-text\"]")
     private WebElement loginError;
+
+    @FindBy(id = "gcid-button")
+    private WebElement enter;
 
     public LoginPage(WebDriver driver)
     {
@@ -38,18 +41,19 @@ public class LoginPage {
 
     public LoginPage openPage()
     {
-        this.driver.get(RegistrationForm_URL);
         this.driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
+        this.driver.get(RegistrationForm_URL);
 
         return this;
     }
 
     public LoginPage userLogin(User user)
     {
-        waitForElementToBeClickable(this.driver, By.id("gcid-signin-view"));
         buttonTypeOfLogin.click();
+        waitForElementToBeClickable(this.driver, By.xpath("//*[@id=\"gcid-button\"]"));
         inputLogin.sendKeys(user.getUserEmail());
         inputPassword.sendKeys(user.getUserPassword());
+        enter.click();
 
         return this;
     }
@@ -57,7 +61,6 @@ public class LoginPage {
     public String checkErrorMessage()
     {
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("gcid-content-side-padding")));
         String userError = loginError.getText();
         logger.error("The following errors were received during login: " + userError);
 
