@@ -23,7 +23,7 @@ public class Tests extends CommonConditions
         .checkErrorMessage();
     }
 
-    @Test(priority = 1)
+    @Test(priority = 2)
     public void failedLogin()
     {
         User userInvalidPassword = UserCreator.InvalidPassword();
