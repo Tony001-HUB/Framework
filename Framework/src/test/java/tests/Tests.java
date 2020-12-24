@@ -9,11 +9,11 @@ import service.UserCreator;
 public class Tests extends CommonConditions
 {
     //CD /Framework
-    //mvn -Dbrowser=chrome -Denvironment=LowLimitSymbols -Dsurefire.suiteXmlFiles=src\test\resources\testng-all clean test
+    //mvn -Dbrowser=chrome -Denvironment=CommonToAllTests -Dsurefire.suiteXmlFiles=src\test\resources\testng-all clean test
     //mvn -Dbrowser=chrome -Denvironment=InvalidPassword -Dsurefire.suiteXmlFiles=src\test\resources\testng-all clean test
     //chcp 1251
 
-    //@Test(priority = 1)
+    @Test(priority = 1)
     public void registrationWithLowLimitSymbols()
     {
         User userWithInvalidPassword = UserCreator.WithLowLimitSymbols();
@@ -23,7 +23,7 @@ public class Tests extends CommonConditions
         .checkErrorMessage();
     }
 
-    @Test
+    @Test(priority = 1)
     public void failedLogin()
     {
         User userInvalidPassword = UserCreator.InvalidPassword();
