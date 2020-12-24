@@ -55,6 +55,7 @@ public class HomePage {
         inputSearch.sendKeys(Product.getProductName());
         inputSearch.sendKeys(Keys.ENTER);
 
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return new SpecificSearchResults(driver);
     }
 
