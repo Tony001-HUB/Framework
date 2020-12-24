@@ -13,10 +13,6 @@ public class Tests extends CommonConditions
     //mvn -Dbrowser=chrome -Denvironment=InvalidPassword -Dsurefire.suiteXmlFiles=src\test\resources\testng-all clean test
     //chcp 1251
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 8f7fb276e05894d91c247c7b8045445cb4a08bc4
     //@Test(priority = 1)
     public void registrationWithLowLimitSymbols()
     {
