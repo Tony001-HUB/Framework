@@ -1,9 +1,13 @@
 package tests;
 
+import model.Product;
 import model.User;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+import page.HomePage;
 import page.LoginPage;
 import page.RegistrationPage;
+import service.ProductCreator;
 import service.UserCreator;
 
 public class Tests extends CommonConditions
@@ -23,7 +27,7 @@ public class Tests extends CommonConditions
         .checkErrorMessage();
     }
 
-    @Test(priority = 1)
+    @Test(priority = 2)
     public void failedLogin()
     {
         User userInvalidPassword = UserCreator.InvalidPassword();
@@ -33,10 +37,16 @@ public class Tests extends CommonConditions
         .checkErrorMessage();
     }
 
-    //@Test
+    @Test(priority = 3)
     public void searchByModelName()
     {
+        Product productName = ProductCreator.EnterProductName();
+        int expectedSearchResult = new HomePage(driver)
+        .openPage()
+        .searchForTerms()
+        .countGeneralNumberOfSearchResults();
 
+        Assert.assertTrue(expectedSearchResult > 0, "search result are empty!");
     }
 
     //@Test

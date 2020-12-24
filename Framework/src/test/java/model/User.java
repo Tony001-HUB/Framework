@@ -4,15 +4,15 @@ import java.util.Objects;
 
 public class User
 {
-    private String username;
+    private String userName;
     private String userLastName;
     private String userEmail;
     private String userPassword;
 
 
 
-    public User(String username, String userLastName, String userEmail, String password) {
-        this.username = username;
+    public User(String userName, String userLastName, String userEmail, String password) {
+        this.userName = userName;
         this.userLastName = userLastName;
         this.userEmail = userEmail;
         this.userPassword = password;
@@ -24,10 +24,10 @@ public class User
     }
 
 
-    public String getUserName() { return username; }
+    public String getUserName() { return userName; }
 
     public void setUserName(String username) {
-        this.username = username;
+        this.userName = username;
     }
 
 
@@ -59,7 +59,7 @@ public class User
     @Override
     public String toString() {
         return "User{" +
-                "userName='" + username + '\'' +
+                "userName='" + userName + '\'' +
                 ", lastName='" + userLastName + '\'' +
                 ", userEmail='" + userEmail + '\'' +
                 ", userPassword='" + userPassword + '\'' +
@@ -71,7 +71,7 @@ public class User
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(username, user.username) &&
+        return Objects.equals(userName, user.userName) &&
                 Objects.equals(userLastName, user.userLastName) &&
                 Objects.equals(userEmail, user.userEmail) &&
                 Objects.equals(userPassword, user.userPassword);
@@ -79,6 +79,6 @@ public class User
 
     @Override
     public int hashCode() {
-        return Objects.hash(username, userLastName, userEmail, userPassword);
+        return Objects.hash(userName, userLastName, userEmail, userPassword);
     }
 }
