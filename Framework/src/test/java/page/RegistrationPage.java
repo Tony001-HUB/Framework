@@ -45,8 +45,8 @@ public class RegistrationPage
 
     public RegistrationPage openPage()
     {
-        this.driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
         this.driver.get(RegistrationForm_URL);
+        this.driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
 
         return this;
     }

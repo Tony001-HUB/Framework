@@ -11,11 +11,13 @@ import org.testng.annotations.Listeners;
 import util.TestListener;
 
 import java.io.File;
+import java.util.Date;
 
 @Listeners({TestListener.class})
 public class CommonConditions
 {
     protected WebDriver driver;
+    Date date = new Date();
     @BeforeMethod()
     public void setUp()
     {
