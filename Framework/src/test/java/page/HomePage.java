@@ -47,20 +47,21 @@ public class HomePage {
         return this;
     }
 
-    public SpecificSearchResults searchForTerms()
+    public SpecificSearchResults searchForTerms(Product product)
     {
         waitForElementToBeClickable(this.driver, By.xpath("//*[@id=\"main-header\"]/nav/div[2]"));
         agreeSiteRulesButton.click();
         activateButtonSearch.click();
-        inputSearch.sendKeys(Product.getProductName());
+        waitForElementToBeClickable(this.driver, By.xpath("//*[@id=\"nav__search-form-input\"]"));
+        inputSearch.sendKeys(product.getProductName());
         inputSearch.sendKeys(Keys.ENTER);
 
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
         return new SpecificSearchResults(driver);
     }
 
     private  WebElement waitForElementToBeClickable(WebDriver driver, By by) {
-        return new WebDriverWait(driver, 30)
+        return new WebDriverWait(driver, 10)
                 .until(ExpectedConditions
                         .elementToBeClickable(by));
     }

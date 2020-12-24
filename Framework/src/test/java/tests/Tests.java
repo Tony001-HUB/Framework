@@ -43,7 +43,7 @@ public class Tests extends CommonConditions
         Product productName = ProductCreator.EnterProductName();
         int expectedSearchResult = new HomePage(driver)
         .openPage()
-        .searchForTerms()
+        .searchForTerms(productName)
         .countGeneralNumberOfSearchResults();
 
         Assert.assertTrue(expectedSearchResult > 0, "search result are empty!");
