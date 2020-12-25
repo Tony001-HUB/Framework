@@ -4,10 +4,7 @@ import model.Product;
 import model.User;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import page.AddProductToCartPage;
-import page.HomePage;
-import page.LoginPage;
-import page.RegistrationPage;
+import page.*;
 import service.ProductCreator;
 import service.UserCreator;
 
@@ -50,7 +47,7 @@ public class Tests extends CommonConditions
         Assert.assertTrue(expectedSearchResult > 0, "search result are empty!");
     }
 
-    @Test(priority = 4)
+    //@Test(priority = 4)
     public void addItemInShoppingCart()
     {
        new AddProductToCartPage(driver)
@@ -59,10 +56,12 @@ public class Tests extends CommonConditions
 
     }
 
-    //@Test
+    @Test(priority = 5)
     public void deletingFromShoppingCart()
     {
-
+        new DeleteProductFromCartPage(driver)
+                .openPage()
+                .deleteProductFromCart();
     }
 
     //@Test

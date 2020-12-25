@@ -20,12 +20,12 @@ public class DriverSingleton {
                 case "gecko": {
                     WebDriverManager.firefoxdriver().setup();
                     driver = new FirefoxDriver();
-                    driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
+                    driver.manage().timeouts().pageLoadTimeout(50, TimeUnit.SECONDS);
                 }
                 default: {
                     WebDriverManager.chromedriver().setup();
                     driver = new ChromeDriver();
-                    driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
+                    driver.manage().timeouts().pageLoadTimeout(50, TimeUnit.SECONDS);
                 }
                 driver.manage().window().maximize();
             }
