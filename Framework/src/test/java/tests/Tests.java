@@ -4,6 +4,7 @@ import model.Product;
 import model.User;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import page.AddProductToCartPage;
 import page.HomePage;
 import page.LoginPage;
 import page.RegistrationPage;
@@ -17,7 +18,7 @@ public class Tests extends CommonConditions
     //mvn -Dbrowser=chrome -Denvironment=InvalidPassword -Dsurefire.suiteXmlFiles=src\test\resources\testng-all clean test
     //chcp 1251
 
-    @Test(priority = 1)
+   // @Test(priority = 1)
     public void registrationWithLowLimitSymbols()
     {
         User userWithInvalidPassword = UserCreator.WithLowLimitSymbols();
@@ -27,7 +28,7 @@ public class Tests extends CommonConditions
         .checkErrorMessage();
     }
 
-    @Test(priority = 2)
+   // @Test(priority = 2)
     public void failedLogin()
     {
         User userInvalidPassword = UserCreator.InvalidPassword();
@@ -37,7 +38,7 @@ public class Tests extends CommonConditions
         .checkErrorMessage();
     }
 
-    @Test(priority = 3)
+    //@Test(priority = 3)
     public void searchByModelName()
     {
         Product productName = ProductCreator.EnterProductName();
@@ -49,9 +50,12 @@ public class Tests extends CommonConditions
         Assert.assertTrue(expectedSearchResult > 0, "search result are empty!");
     }
 
-    //@Test
+    @Test(priority = 4)
     public void addItemInShoppingCart()
     {
+       new AddProductToCartPage(driver)
+               .openPage()
+               .addProductToCart();
 
     }
 

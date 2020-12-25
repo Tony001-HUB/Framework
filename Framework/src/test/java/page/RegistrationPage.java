@@ -11,8 +11,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
-
 public class RegistrationPage
 {
     private static final String RegistrationForm_URL = "https://myid.canon/canonid/#/registration";
@@ -45,7 +43,6 @@ public class RegistrationPage
 
     public RegistrationPage openPage()
     {
-        this.driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
         this.driver.get(RegistrationForm_URL);
 
         return this;

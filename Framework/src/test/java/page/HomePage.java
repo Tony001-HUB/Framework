@@ -12,11 +12,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
-
 public class HomePage {
 
-    private static final String HomeForm_URL = "https://canon.ru/";
+    private static final String HomeForm_URL = "https://store.canon.ru/";
     private WebDriver driver;
     private final Logger logger = LogManager.getRootLogger();
 
@@ -41,7 +39,6 @@ public class HomePage {
 
     public HomePage openPage()
     {
-        this.driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
         this.driver.get(HomeForm_URL);
 
         return this;

@@ -11,8 +11,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
-
 public class LoginPage {
     private static final String LoginForm_URL = "https://myid.canon/canonid/#/login";
     private WebDriver driver;
@@ -41,7 +39,6 @@ public class LoginPage {
 
     public LoginPage openPage()
     {
-        this.driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
         this.driver.get(LoginForm_URL);
 
         return this;
