@@ -15,7 +15,7 @@ public class Tests extends CommonConditions
     //mvn -Dbrowser=chrome -Denvironment=InvalidPassword -Dsurefire.suiteXmlFiles=src\test\resources\testng-all clean test
     //chcp 1251
 
-   // @Test(priority = 1)
+    //@Test(priority = 1)
     public void registrationWithLowLimitSymbols()
     {
         User userWithInvalidPassword = UserCreator.WithLowLimitSymbols();
@@ -88,7 +88,7 @@ public class Tests extends CommonConditions
                 .checkVerificationMessage();
     }
 
-    @Test(priority = 8)
+    //@Test(priority = 8)
     public void getPromoCodeWithoutRequiredField()
     {
         new GettingFellPromoCodePage(driver)
@@ -98,9 +98,18 @@ public class Tests extends CommonConditions
         ;
     }
 
-    //@Test
+    @Test
     public void productsComparison()
     {
+        int expectedSearchResult = new AddToCompareTwoProductsPage(driver)
+                .openPageFirstItem()
+                .addingCompareFirstProduct()
+                .openPageSecondItem()
+                .addingCompareSecondProduct()
+                .openProductComparisonPage()
+                .countGeneralNumberOfSearchResults()
+                ;
 
+        Assert.assertTrue(expectedSearchResult > 0, "search result are empty!");
     }
 }
