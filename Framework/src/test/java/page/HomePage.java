@@ -47,7 +47,7 @@ public class HomePage {
         return this;
     }
 
-    public SpecificSearchResults searchForTerms(Product product)
+    public SpecificSearchResultsPage searchForTerms(Product product)
     {
         waitForElementToBeClickable(this.driver, By.xpath("//*[@id=\"main-header\"]/nav/div[2]"));
         agreeSiteRulesButton.click();
@@ -57,7 +57,7 @@ public class HomePage {
         inputSearch.sendKeys(Keys.ENTER);
 
 
-        return new SpecificSearchResults(driver);
+        return new SpecificSearchResultsPage(driver);
     }
 
     public TestingSearchOptionsPage searchByOptions()

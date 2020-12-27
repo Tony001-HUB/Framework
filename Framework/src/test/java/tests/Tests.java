@@ -78,21 +78,24 @@ public class Tests extends CommonConditions
     }
 
     //wait.until(stalenessOf(switchPriceDescendingOrderButton));
-    @Test(priority = 7)
+    //@Test(priority = 7)
     public void checkingSerialNumber()
     {
         Product product = ProductCreator.EnterProductNameAndSerialNumber();
         new SerialNumberVerificationPage(driver)
                 .openPage()
                 .fillingDataModel(product)
-                .checkVerificationMessage()
-                ;
+                .checkVerificationMessage();
     }
 
-    //@Test
-    public void usePromoCode()
+    @Test(priority = 8)
+    public void getPromoCodeWithoutRequiredField()
     {
-
+        new GettingFellPromoCodePage(driver)
+                .openPage()
+                .gettingPromoCode()
+                .checkErrorMessage()
+        ;
     }
 
     //@Test

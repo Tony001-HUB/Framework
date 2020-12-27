@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class SpecificSearchResults {
+public class SpecificSearchResultsPage {
 
     private static final String RegistrationForm_URL = "https://canon.ru/";
     private WebDriver driver;
@@ -21,7 +21,7 @@ public class SpecificSearchResults {
     @FindBy(className = "onsite-search__result-item")
     private List<WebElement> generalSearchResult;
 
-    public SpecificSearchResults(WebDriver driver)
+    public SpecificSearchResultsPage(WebDriver driver)
     {
         this.driver = driver;
         PageFactory.initElements(driver, this);
