@@ -56,7 +56,7 @@ public class Tests extends CommonConditions
 
     }
 
-    @Test(priority = 5)
+    //@Test(priority = 5)
     public void deletingFromShoppingCart()
     {
         new DeleteProductFromCartPage(driver)
@@ -64,22 +64,29 @@ public class Tests extends CommonConditions
                 .deleteProductFromCart();
     }
 
-    //@Test
+    //@Test(priority = 6)
     public void TestingPerformanceFilterSearch()
     {
+        int expectedSearchResult = new HomePage(driver)
+                .openPage()
+                .searchByOptions()
+                .selectionByPrice()
+                .selectionByDestination()
+                .countGeneralNumberOfSearchResults();
 
+        Assert.assertTrue(expectedSearchResult > 0, "search result are empty!");
     }
 
-    //@Test
-    public void checkCorrectlyWorkSearchFilter()
+    //wait.until(stalenessOf(switchPriceDescendingOrderButton));
+    @Test(priority = 7)
+    public void checkingSerialNumber()
     {
-
-    }
-
-    //@Test
-    public void createReviewOnProduct()
-    {
-
+        Product product = ProductCreator.EnterProductNameAndSerialNumber();
+        new SerialNumberVerificationPage(driver)
+                .openPage()
+                .fillingDataModel(product)
+                .checkVerificationMessage()
+                ;
     }
 
     //@Test

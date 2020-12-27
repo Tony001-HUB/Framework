@@ -30,6 +30,9 @@ public class HomePage {
     @FindBy(id="nav__search-form-input")
     private WebElement inputSearch;
 
+    @FindBy(xpath="//*[@id=\"groupMenu\"]/li[1]/a/span/span")
+    private WebElement goToCamerasButton;
+
 
     public HomePage(WebDriver driver)
     {
@@ -55,6 +58,12 @@ public class HomePage {
 
 
         return new SpecificSearchResults(driver);
+    }
+
+    public TestingSearchOptionsPage searchByOptions()
+    {
+        goToCamerasButton.click();
+        return new TestingSearchOptionsPage(driver);
     }
 
     private  WebElement waitForElementToBeClickable(WebDriver driver, By by) {
