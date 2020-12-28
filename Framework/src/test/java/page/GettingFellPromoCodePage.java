@@ -42,6 +42,8 @@ public class GettingFellPromoCodePage extends AbstractPage{
     {
         enteringGmail.sendKeys("hguihggjjh@gmail.com");
         buttonForGettingPromoCode.click();
+        logger.error("Email is entered and the button to get a promo code is pressed");
+
         return this;
     }
 

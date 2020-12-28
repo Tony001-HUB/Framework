@@ -52,6 +52,7 @@ public class SerialNumberVerificationPage extends AbstractPage
         inputSerialNumber.sendKeys(product.getSerialNumber());
         submitReviewButton.click();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        logger.error("Successful completion of serial number data");
 
         return this;
     }

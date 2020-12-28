@@ -31,6 +31,7 @@ public class AddProductToCartPage extends AbstractPage {
     {
         waitForElementToBeVisibility(this.driver, By.id("product-addtocart-button") );
         addToCartButton.click();
+        logger.error("Successful adding to cart");
 
         return this;
     }

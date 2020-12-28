@@ -48,6 +48,7 @@ public class HomePage extends AbstractPage{
         waitForElementToBeClickable(this.driver, By.xpath("//*[@id=\"nav__search-form-input\"]"));
         inputSearch.sendKeys(product.getProductName());
         inputSearch.sendKeys(Keys.ENTER);
+        logger.error("Successful product search");
 
         return new SpecificSearchResultsPage();
     }
@@ -55,6 +56,8 @@ public class HomePage extends AbstractPage{
     public TestingSearchOptionsPage searchByOptions()
     {
         goToCamerasButton.click();
+        logger.error("Go to cameras products");
+
         return new TestingSearchOptionsPage();
     }
 

@@ -39,13 +39,16 @@ public class DeleteProductFromCartPage extends AbstractPage {
     {
         waitForElementToBeVisibility(this.driver, By.id("product-addtocart-button") );
         addToCartButton.click();
+        logger.error("The product was successfully added");
     }
 
     public DeleteProductFromCartPage deleteProductFromCart()
     {
         addProductToCart();
         openCartButton.click();
+        logger.error("The cart is open successfully");
         deleteProductFromCartButton.click();
+        logger.error("The product was successfully delete");
 
         return this;
     }

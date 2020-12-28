@@ -38,6 +38,7 @@ public class AddToCompareTwoProductsPage extends AbstractPage {
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         this.driver.get(OneProductForm_URL);
         cookieAllowButton.click();
+        logger.error("Successful opening of the first product");
         return this;
     }
 
@@ -45,6 +46,7 @@ public class AddToCompareTwoProductsPage extends AbstractPage {
     {
         driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
         this.driver.get(TwoProductForm_URL);
+        logger.error("Successful opening of the second product");
         return this;
     }
 
@@ -52,6 +54,7 @@ public class AddToCompareTwoProductsPage extends AbstractPage {
     {
         waitForElementToBeClickable(this.driver, By.id("productInfoToCart"));
         addProductButton.click();
+        logger.error("First product added to compare successfully");
 
         return this;
     }
@@ -60,6 +63,7 @@ public class AddToCompareTwoProductsPage extends AbstractPage {
     {
         waitForElementToBeClickable(this.driver, By.id("productInfoToCart"));
         addProductButton.click();
+        logger.error("Second product added to compare successfully");
 
         return this;
     }
@@ -67,6 +71,7 @@ public class AddToCompareTwoProductsPage extends AbstractPage {
     public ProductComparisonPage openProductComparisonPage()
     {
         openСomparisonPageButton.click();
+        logger.error("Transition to the product comparison page");
 
         return new ProductComparisonPage();
     }

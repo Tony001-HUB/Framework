@@ -49,6 +49,7 @@ public class TestingSearchOptionsPage extends AbstractPage {
         switchPriceDescendingOrderButton.click();
         waitForElementToBeClickable(this.driver, By.className("products list items product-items"));
         selectionByPriceButton.click();
+        logger.error("Successfully selection by price");
 
         return this;
     }
@@ -56,6 +57,7 @@ public class TestingSearchOptionsPage extends AbstractPage {
     public TestingSearchOptionsPage selectionByDestination() {
         waitForElementToBeClickable(this.driver, By.className("products list items product-items"));
         selectionByDestinationButton.click();
+        logger.error("Successfully selection by destination");
 
         return this;
     }

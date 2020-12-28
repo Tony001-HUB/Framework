@@ -52,6 +52,7 @@ public class RegistrationPage extends AbstractPage
         inputUserName.sendKeys(user.getUserName());
         inputUserLastName.sendKeys(user.getUserLastName());
         buttonSubmit.click();
+        logger.error("Successful completion of user data");
 
         return this;
     }

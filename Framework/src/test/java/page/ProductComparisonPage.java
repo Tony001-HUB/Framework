@@ -1,6 +1,8 @@
 package page;
 
 import driver.DriverSingleton;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,6 +12,7 @@ import java.util.List;
 public class ProductComparisonPage extends AbstractPage{
 
     private WebDriver driver;
+    private final Logger logger = LogManager.getRootLogger();
 
     @FindBy(xpath="//*[@id=\"product-comparison\"]/thead/tr/td[1]/a")
     private WebElement deleteProductButton;
@@ -24,6 +27,7 @@ public class ProductComparisonPage extends AbstractPage{
     public ProductComparisonPage()
     {
         super(DriverSingleton.getDriver());
+        logger.error("Successful transition to the product comparison page");
     }
 
     @Override
@@ -33,6 +37,8 @@ public class ProductComparisonPage extends AbstractPage{
     {
         deleteProductButton.click();
         agreeWithDeleteProductButton.click();
+        logger.error("The product was successfully deleted");
+
         return this;
     }
 

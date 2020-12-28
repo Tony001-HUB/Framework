@@ -49,6 +49,7 @@ public class LoginPage extends AbstractPage
         inputLogin.sendKeys(user.getUserEmail());
         inputPassword.sendKeys(user.getUserPassword());
         enter.click();
+        logger.error("Successful completion of user data");
 
         return this;
     }
