@@ -1,5 +1,6 @@
 package page;
 
+import driver.DriverSingleton;
 import model.Product;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -8,13 +9,10 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
-public class SerialNumberVerificationPage
+public class SerialNumberVerificationPage extends AbstractPage
 {
     private static final String SerialNumberVerificationForm_URL = "https://www.canon.ru/about_us/serial-number-checker/#serial";
     private WebDriver driver;
@@ -35,16 +33,14 @@ public class SerialNumberVerificationPage
     @FindBy(id="_evidon-accept-button")
     private WebElement agreeSiteRulesButton;
 
-
-    public SerialNumberVerificationPage(WebDriver driver)
+    public SerialNumberVerificationPage()
     {
-        this.driver = driver;
-        PageFactory.initElements(this.driver, this);
+        super(DriverSingleton.getDriver());
     }
 
     public SerialNumberVerificationPage openPage()
     {
-        this.driver.get(SerialNumberVerificationForm_URL);
+        driver.get(SerialNumberVerificationForm_URL);
         return this;
     }
 
@@ -67,12 +63,6 @@ public class SerialNumberVerificationPage
         logger.error("Serial number information: " + verificationReport.getText());
 
         return userError;
-    }
-
-    private  WebElement waitForElementToBeClickable(WebDriver driver, By by) {
-        return new WebDriverWait(driver, 20)
-                .until(ExpectedConditions
-                        .visibilityOfElementLocated(by));
     }
 
 }

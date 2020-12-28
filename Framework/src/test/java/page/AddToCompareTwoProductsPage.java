@@ -1,24 +1,18 @@
 package page;
 
+import driver.DriverSingleton;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
-public class AddToCompareTwoProductsPage {
+public class AddToCompareTwoProductsPage extends AbstractPage {
 
     private static final String OneProductForm_URL = "https://store.canon.ru/mnogofunkcional-nyj-strujnyj-printer-pixma-mg2540s.html";
     private static final String TwoProductForm_URL = "https://store.canon.ru/mnogofunkcional-nyj-strujnyj-printer-pixma-mg3640s-chernyj.html";
-
-
-    private WebDriver driver;
     private final Logger logger = LogManager.getRootLogger();
 
     @FindBy(xpath="/html/body/div[3]/header/div[3]/div[5]/div[2]/a/div/div")
@@ -33,13 +27,13 @@ public class AddToCompareTwoProductsPage {
     @FindBy(id = "btn-cookie-allow")
     private WebElement cookieAllowButton;
 
-    public AddToCompareTwoProductsPage(WebDriver driver)
+    public AddToCompareTwoProductsPage()
     {
-        this.driver = driver;
-        PageFactory.initElements(this.driver, this);
+        super(DriverSingleton.getDriver());
     }
 
-    public AddToCompareTwoProductsPage openPageFirstItem()
+    @Override
+    public AddToCompareTwoProductsPage openPage()
     {
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         this.driver.get(OneProductForm_URL);
@@ -74,14 +68,9 @@ public class AddToCompareTwoProductsPage {
     {
         openСomparisonPageButton.click();
 
-        return new ProductComparisonPage(driver);
+        return new ProductComparisonPage();
     }
 
-    private  WebElement waitForElementToBeClickable(WebDriver driver, By by) {
-        return new WebDriverWait(driver, 20)
-                .until(ExpectedConditions
-                        .elementToBeClickable(by));
-    }
 
 
 

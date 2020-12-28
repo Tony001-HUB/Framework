@@ -1,19 +1,18 @@
 package page;
 
+import driver.DriverSingleton;
 import model.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class LoginPage {
-    private static final String LoginForm_URL = "https://myid.canon/canonid/#/login";
-    private WebDriver driver;
+public class LoginPage extends AbstractPage
+{
+
+    private static final String LoginForm_URL = "http://myid.canon/canonid/#/login";
     private final Logger logger = LogManager.getRootLogger();
 
     @FindBy(id = "gcid-email")
@@ -31,16 +30,15 @@ public class LoginPage {
     @FindBy(id = "gcid-button")
     private WebElement enter;
 
-    public LoginPage(WebDriver driver)
+    public LoginPage()
     {
-        this.driver = driver;
-        PageFactory.initElements(this.driver, this);
+        super(DriverSingleton.getDriver());
     }
 
+    @Override
     public LoginPage openPage()
     {
-        this.driver.get(LoginForm_URL);
-
+        driver.get(LoginForm_URL);
         return this;
     }
 
@@ -64,10 +62,4 @@ public class LoginPage {
         return userError;
     }
 
-
-    private  WebElement waitForElementToBeClickable(WebDriver driver, By by) {
-        return new WebDriverWait(driver, 10)
-                .until(ExpectedConditions
-                        .elementToBeClickable(by));
-    }
 }

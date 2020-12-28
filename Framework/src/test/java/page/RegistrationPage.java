@@ -1,20 +1,18 @@
 package page;
 
+import driver.DriverSingleton;
 import model.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class RegistrationPage
+public class RegistrationPage extends AbstractPage
 {
     private static final String RegistrationForm_URL = "https://myid.canon/canonid/#/registration";
-    private WebDriver driver;
     private final Logger logger = LogManager.getRootLogger();
 
     @FindBy(id = "regEmail")
@@ -35,16 +33,14 @@ public class RegistrationPage
     @FindBy(xpath = "//*[@id=\"site-container\"]/registration-container/div/user-registration/md-content[2]/div/form/password-field/md-input-container/div[2]/div[2]")
     private WebElement registerError;
 
-    public RegistrationPage(WebDriver driver)
+    public RegistrationPage()
     {
-        this.driver = driver;
-        PageFactory.initElements(this.driver, this);
+        super(DriverSingleton.getDriver());
     }
 
     public RegistrationPage openPage()
     {
-        this.driver.get(RegistrationForm_URL);
-
+        driver.get(RegistrationForm_URL);
         return this;
     }
 
@@ -69,14 +65,6 @@ public class RegistrationPage
 
         return userError;
     }
-
-
-    private  WebElement waitForElementToBeClickable(WebDriver driver, By by) {
-        return new WebDriverWait(driver, 10)
-                .until(ExpectedConditions
-                        .elementToBeClickable(by));
-    }
-
 
 }
 

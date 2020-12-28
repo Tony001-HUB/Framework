@@ -1,19 +1,15 @@
 package page;
 
+import driver.DriverSingleton;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class GettingFellPromoCodePage {
+public class GettingFellPromoCodePage extends AbstractPage{
 
     private static final String PromoCode_URL = "https://store.canon.ru";
-    private WebDriver driver;
     private final Logger logger = LogManager.getRootLogger();
 
 
@@ -30,12 +26,12 @@ public class GettingFellPromoCodePage {
     private WebElement buttonForGettingPromoCode;
 
 
-    public GettingFellPromoCodePage(WebDriver driver)
+    public GettingFellPromoCodePage()
     {
-        this.driver = driver;
-        PageFactory.initElements(this.driver, this);
+        super(DriverSingleton.getDriver());
     }
 
+    @Override
     public GettingFellPromoCodePage openPage()
     {
         this.driver.get(PromoCode_URL);
@@ -51,17 +47,11 @@ public class GettingFellPromoCodePage {
 
     public String checkErrorMessage()
     {
-        waitForElementToVisibility(this.driver, By.id("checkbox-agreements-error"));
+        waitForElementToBeVisibility(this.driver, By.id("checkbox-agreements-error"));
         String userError = errorReport.getText();
         logger.error("Error information: " + errorReport.getText());
 
         return userError;
-    }
-
-    private  WebElement waitForElementToVisibility(WebDriver driver, By by) {
-        return new WebDriverWait(driver, 20)
-                .until(ExpectedConditions
-                        .visibilityOfElementLocated(by));
     }
 
 

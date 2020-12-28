@@ -1,21 +1,17 @@
 package page;
 
+import driver.DriverSingleton;
 import model.Product;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class HomePage {
+public class HomePage extends AbstractPage{
 
-    private static final String HomeForm_URL = "https://store.canon.ru/";
-    private WebDriver driver;
+    private static final String HomeForm_URL = "https://canon.ru";
     private final Logger logger = LogManager.getRootLogger();
 
     @FindBy(id="_evidon-accept-button")
@@ -34,41 +30,32 @@ public class HomePage {
     private WebElement goToCamerasButton;
 
 
-    public HomePage(WebDriver driver)
+    public HomePage()
     {
-        this.driver = driver;
-        PageFactory.initElements(this.driver, this);
+        super(DriverSingleton.getDriver());
     }
 
     public HomePage openPage()
     {
-        this.driver.get(HomeForm_URL);
-
+        driver.get(HomeForm_URL);
         return this;
     }
 
     public SpecificSearchResultsPage searchForTerms(Product product)
     {
-        waitForElementToBeClickable(this.driver, By.xpath("//*[@id=\"main-header\"]/nav/div[2]"));
         agreeSiteRulesButton.click();
         activateButtonSearch.click();
         waitForElementToBeClickable(this.driver, By.xpath("//*[@id=\"nav__search-form-input\"]"));
         inputSearch.sendKeys(product.getProductName());
         inputSearch.sendKeys(Keys.ENTER);
 
-
-        return new SpecificSearchResultsPage(driver);
+        return new SpecificSearchResultsPage();
     }
 
     public TestingSearchOptionsPage searchByOptions()
     {
         goToCamerasButton.click();
-        return new TestingSearchOptionsPage(driver);
+        return new TestingSearchOptionsPage();
     }
 
-    private  WebElement waitForElementToBeClickable(WebDriver driver, By by) {
-        return new WebDriverWait(driver, 10)
-                .until(ExpectedConditions
-                        .elementToBeClickable(by));
-    }
 }

@@ -12,34 +12,36 @@ public class Tests extends CommonConditions
 {
     //CD /Framework
     //mvn -Dbrowser=chrome -Denvironment=CommonToAllTests -Dsurefire.suiteXmlFiles=src\test\resources\testng-all clean test
+    //mvn -Dbrowser=gecko -Denvironment=CommonToAllTests -Dsurefire.suiteXmlFiles=src\test\resources\testng-all clean test
     //mvn -Dbrowser=chrome -Denvironment=InvalidPassword -Dsurefire.suiteXmlFiles=src\test\resources\testng-all clean test
     //chcp 1251
 
-    //@Test(priority = 1)
+    @Test(priority = 1)
     public void registrationWithLowLimitSymbols()
     {
         User userWithInvalidPassword = UserCreator.WithLowLimitSymbols();
-        new RegistrationPage(driver)
+        new RegistrationPage()
         .openPage()
         .userRegistration(userWithInvalidPassword)
         .checkErrorMessage();
     }
 
-   // @Test(priority = 2)
+    //@Test(priority = 2)
     public void failedLogin()
     {
         User userInvalidPassword = UserCreator.InvalidPassword();
-        new LoginPage(driver)
+        new LoginPage()
         .openPage()
         .userLogin(userInvalidPassword)
-        .checkErrorMessage();
+        .checkErrorMessage()
+        ;
     }
 
     //@Test(priority = 3)
     public void searchByModelName()
     {
         Product productName = ProductCreator.EnterProductName();
-        int expectedSearchResult = new HomePage(driver)
+        int expectedSearchResult = new HomePage()
         .openPage()
         .searchForTerms(productName)
         .countGeneralNumberOfSearchResults();
@@ -50,7 +52,7 @@ public class Tests extends CommonConditions
     //@Test(priority = 4)
     public void addItemInShoppingCart()
     {
-       new AddProductToCartPage(driver)
+       new AddProductToCartPage()
                .openPage()
                .addProductToCart();
 
@@ -59,7 +61,7 @@ public class Tests extends CommonConditions
     //@Test(priority = 5)
     public void deletingFromShoppingCart()
     {
-        new DeleteProductFromCartPage(driver)
+        new DeleteProductFromCartPage()
                 .openPage()
                 .deleteProductFromCart();
     }
@@ -67,7 +69,7 @@ public class Tests extends CommonConditions
     //@Test(priority = 6)
     public void TestingPerformanceFilterSearch()
     {
-        int expectedSearchResult = new HomePage(driver)
+        int expectedSearchResult = new HomePage()
                 .openPage()
                 .searchByOptions()
                 .selectionByPrice()
@@ -82,7 +84,7 @@ public class Tests extends CommonConditions
     public void checkingSerialNumber()
     {
         Product product = ProductCreator.EnterProductNameAndSerialNumber();
-        new SerialNumberVerificationPage(driver)
+        new SerialNumberVerificationPage()
                 .openPage()
                 .fillingDataModel(product)
                 .checkVerificationMessage();
@@ -91,7 +93,7 @@ public class Tests extends CommonConditions
     //@Test(priority = 8)
     public void getPromoCodeWithoutRequiredField()
     {
-        new GettingFellPromoCodePage(driver)
+        new GettingFellPromoCodePage()
                 .openPage()
                 .gettingPromoCode()
                 .checkErrorMessage()
@@ -101,8 +103,8 @@ public class Tests extends CommonConditions
     //@Test(priority = 9)
     public void productsComparison()
     {
-        int expectedSearchResult = new AddToCompareTwoProductsPage(driver)
-                .openPageFirstItem()
+        int expectedSearchResult = new AddToCompareTwoProductsPage()
+                .openPage()
                 .addingCompareFirstProduct()
                 .openPageSecondItem()
                 .addingCompareSecondProduct()
@@ -113,11 +115,11 @@ public class Tests extends CommonConditions
         Assert.assertTrue(expectedSearchResult > 0, "search result are empty!");
     }
 
-    @Test(priority = 10)
+    //@Test(priority = 10)
     public void deleteProductsComparisonFromList()
     {
-        int expectedSearchResult = new AddToCompareTwoProductsPage(driver)
-                .openPageFirstItem()
+        int expectedSearchResult = new AddToCompareTwoProductsPage()
+                .openPage()
                 .addingCompareFirstProduct()
                 .openPageSecondItem()
                 .addingCompareSecondProduct()

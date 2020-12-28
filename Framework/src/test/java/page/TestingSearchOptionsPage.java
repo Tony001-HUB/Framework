@@ -1,18 +1,17 @@
 package page;
 
+import driver.DriverSingleton;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class TestingSearchOptionsPage {
+public class TestingSearchOptionsPage extends AbstractPage {
 
     private WebDriver driver;
     WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -36,10 +35,13 @@ public class TestingSearchOptionsPage {
     @FindBy(className = "item product product-item")
     private List<WebElement> generalSearchResult;
 
-    public TestingSearchOptionsPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(this.driver, this);
+    public TestingSearchOptionsPage()
+    {
+        super(DriverSingleton.getDriver());
     }
+
+    @Override
+    public TestingSearchOptionsPage openPage() { return this; }
 
     public TestingSearchOptionsPage selectionByPrice() {
         waitForElementToBeClickable(this.driver, By.className("products list items product-items"));
@@ -64,11 +66,4 @@ public class TestingSearchOptionsPage {
         System.out.println("Number of results:" + generalSearchResult.size());
         return  generalSearchResult.size();
     }
-
-    private  WebElement waitForElementToBeClickable(WebDriver driver, By by) {
-        return new WebDriverWait(driver, 40)
-                .until(ExpectedConditions
-                        .elementToBeClickable(by));
-    }
-
 }

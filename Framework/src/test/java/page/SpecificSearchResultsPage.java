@@ -1,18 +1,16 @@
 package page;
 
+import driver.DriverSingleton;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class SpecificSearchResultsPage {
+public class SpecificSearchResultsPage extends AbstractPage {
 
     private static final String RegistrationForm_URL = "https://canon.ru/";
     private WebDriver driver;
@@ -21,11 +19,13 @@ public class SpecificSearchResultsPage {
     @FindBy(className = "onsite-search__result-item")
     private List<WebElement> generalSearchResult;
 
-    public SpecificSearchResultsPage(WebDriver driver)
+    public SpecificSearchResultsPage()
     {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(DriverSingleton.getDriver());
     }
+
+    @Override
+    public SpecificSearchResultsPage openPage() { return this; }
 
     public int countGeneralNumberOfSearchResults()
     {
@@ -34,10 +34,4 @@ public class SpecificSearchResultsPage {
         return  generalSearchResult.size();
     }
 
-
-    private  WebElement waitForElementToBeClickable(WebDriver driver, By by) {
-        return new WebDriverWait(driver, 20)
-                .until(ExpectedConditions
-                        .visibilityOfElementLocated(by));
-    }
 }

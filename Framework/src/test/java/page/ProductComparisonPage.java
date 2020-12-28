@@ -1,13 +1,13 @@
 package page;
 
+import driver.DriverSingleton;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class ProductComparisonPage {
+public class ProductComparisonPage extends AbstractPage{
 
     private WebDriver driver;
 
@@ -21,11 +21,13 @@ public class ProductComparisonPage {
     private List<WebElement> generalSearchResult;
 
 
-    public ProductComparisonPage(WebDriver driver)
+    public ProductComparisonPage()
     {
-        this.driver = driver;
-        PageFactory.initElements(this.driver, this);
+        super(DriverSingleton.getDriver());
     }
+
+    @Override
+    public ProductComparisonPage openPage() { return this; }
 
     public ProductComparisonPage deleteProduct()
     {
