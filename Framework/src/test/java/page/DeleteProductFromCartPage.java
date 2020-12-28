@@ -11,7 +11,7 @@ import service.TestDataReader;
 import java.util.concurrent.TimeUnit;
 
 public class DeleteProductFromCartPage extends AbstractPage {
-    private static final String DeleteCameraFromСart_URL = TestDataReader.getTestData("test.data.DeleteCameraFromСart.link");
+    private static final String DeleteCameraFromСart_URL = TestDataReader.getTestData("test.data.DeleteCameraFrom.link");
     private final Logger logger = LogManager.getRootLogger();
 
     @FindBy(xpath="/html/body/div[3]/header/div[3]/div[5]/div[2]/a/div/div")

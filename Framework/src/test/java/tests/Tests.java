@@ -8,6 +8,9 @@ import page.*;
 import service.ProductCreator;
 import service.UserCreator;
 
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+
+
 public class Tests extends CommonConditions
 {
     //CD /Framework
@@ -16,7 +19,7 @@ public class Tests extends CommonConditions
     //mvn -Dbrowser=chrome -Denvironment=InvalidPassword -Dsurefire.suiteXmlFiles=src\test\resources\testng-all clean test
     //chcp 1251
 
-    //@Test(priority = 1)
+    @Test(priority = 1)
     public void registrationWithLowLimitSymbols()
     {
         User userWithInvalidPassword = UserCreator.WithLowLimitSymbols();
@@ -24,20 +27,23 @@ public class Tests extends CommonConditions
         .openPage()
         .userRegistration(userWithInvalidPassword)
         .checkErrorMessage();
+
+        //assertThat(registrationPage.checkErrorMessage()).isEqualTo("Пароль должен включать не менее 8 знаков и может содержать буквы латинского алфавита, цифры и следующие символы ! \" # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _ ` { | } ~");
     }
 
-    //@Test(priority = 2)
+    @Test(priority = 2)
     public void failedLogin()
     {
         User userInvalidPassword = UserCreator.InvalidPassword();
-        new LoginPage()
+        String errorMessage = new LoginPage()
         .openPage()
         .userLogin(userInvalidPassword)
-        .checkErrorMessage()
-        ;
+        .checkErrorMessage();
+
+        //assertThat(errorMessage.checkErrorMessage()).isEqualTo("Неправильный адрес электронной почты или пароль");
     }
 
-    //@Test(priority = 3)
+    @Test(priority = 3)
     public void searchByModelName()
     {
         Product productName = ProductCreator.EnterProductName();
@@ -49,16 +55,18 @@ public class Tests extends CommonConditions
         Assert.assertTrue(expectedSearchResult > 0, "search result are empty!");
     }
 
-    //@Test(priority = 4)
+    @Test(priority = 4)
     public void addItemInShoppingCart()
     {
-       new AddProductToCartPage()
+        AddProductToCartPage addProductToCartPage = new AddProductToCartPage()
                .openPage()
                .addProductToCart();
 
+        assertThat(addProductToCartPage.getPrice()).isEqualTo("7 499");
+        assertThat(addProductToCartPage.getArticul()).isEqualTo("3884C005");
     }
 
-    //@Test(priority = 5)
+    @Test(priority = 5)
     public void deletingFromShoppingCart()
     {
         new DeleteProductFromCartPage()
@@ -66,7 +74,7 @@ public class Tests extends CommonConditions
                 .deleteProductFromCart();
     }
 
-    //@Test(priority = 6)
+    @Test(priority = 6)
     public void TestingPerformanceFilterSearch()
     {
         int expectedSearchResult = new HomePage()
@@ -80,24 +88,28 @@ public class Tests extends CommonConditions
     }
 
     //wait.until(stalenessOf(switchPriceDescendingOrderButton));
-    //@Test(priority = 7)
+    @Test(priority = 7)
     public void checkingSerialNumber()
     {
         Product product = ProductCreator.EnterProductNameAndSerialNumber();
-        new SerialNumberVerificationPage()
+        String serialNumberInformation = new SerialNumberVerificationPage()
                 .openPage()
                 .fillingDataModel(product)
                 .checkVerificationMessage();
+
+        //assertThat(serialNumberInformation.checkVerificationMessage()).isEqualTo("По вашей покупке требуется дополнительная проверка. Свяжетесь, пожалуйста, с центром поддержки клиентов компании Canon через веб-форму для отправки сообщений.");
     }
 
-    //@Test(priority = 8)
+    @Test(priority = 8)
     public void getPromoCodeWithoutRequiredField()
     {
-        new GettingFellPromoCodePage()
+       String errorMessage = new GettingFellPromoCodePage()
                 .openPage()
                 .gettingPromoCode()
                 .checkErrorMessage()
         ;
+
+        //assertThat(errorMessage.checkErrorMessage()).isEqualTo("Данная электронная почта уже используется");
     }
 
     @Test(priority = 9)
@@ -115,7 +127,7 @@ public class Tests extends CommonConditions
         Assert.assertTrue(expectedSearchResult > 0, "search result are empty!");
     }
 
-    //@Test(priority = 10)
+    @Test(priority = 10)
     public void deleteProductsComparisonFromList()
     {
         int expectedSearchResult = new AddToCompareTwoProductsPage()

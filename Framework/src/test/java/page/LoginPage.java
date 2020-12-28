@@ -64,4 +64,9 @@ public class LoginPage extends AbstractPage
         return userError;
     }
 
+    public String getMessage()
+    {
+        return loginError.getText();
+    }
+
 }
