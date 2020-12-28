@@ -9,12 +9,13 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import service.TestDataReader;
 
 import java.util.concurrent.TimeUnit;
 
 public class SerialNumberVerificationPage extends AbstractPage
 {
-    private static final String SerialNumberVerificationForm_URL = "https://www.canon.ru/about_us/serial-number-checker/#serial";
+    private static final String SerialNumberVerificationForm_URL = TestDataReader.getTestData("test.data.SerialNumber.link");
     private WebDriver driver;
     private final Logger logger = LogManager.getRootLogger();
 

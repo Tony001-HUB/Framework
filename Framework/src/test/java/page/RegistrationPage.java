@@ -9,10 +9,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import service.TestDataReader;
 
 public class RegistrationPage extends AbstractPage
 {
-    private static final String RegistrationForm_URL = "https://myid.canon/canonid/#/registration";
+    private static final String RegistrationForm_URL = TestDataReader.getTestData("test.data.Registration.link");
     private final Logger logger = LogManager.getRootLogger();
 
     @FindBy(id = "regEmail")

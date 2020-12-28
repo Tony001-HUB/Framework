@@ -6,13 +6,14 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import service.TestDataReader;
 
 import java.util.concurrent.TimeUnit;
 
 public class AddToCompareTwoProductsPage extends AbstractPage {
 
-    private static final String OneProductForm_URL = "https://store.canon.ru/mnogofunkcional-nyj-strujnyj-printer-pixma-mg2540s.html";
-    private static final String TwoProductForm_URL = "https://store.canon.ru/mnogofunkcional-nyj-strujnyj-printer-pixma-mg3640s-chernyj.html";
+    private static final String OneProductForm_URL = TestDataReader.getTestData("test.data.OneProduct.link");
+    private static final String TwoProductForm_URL = TestDataReader.getTestData("test.data.TwoProduct.link");
     private final Logger logger = LogManager.getRootLogger();
 
     @FindBy(xpath="/html/body/div[3]/header/div[3]/div[5]/div[2]/a/div/div")

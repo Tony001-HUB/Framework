@@ -6,10 +6,11 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import service.TestDataReader;
 
 public class GettingFellPromoCodePage extends AbstractPage{
 
-    private static final String PromoCode_URL = "https://store.canon.ru";
+    private static final String PromoCode_URL = TestDataReader.getTestData("test.data.PromoCode.link");
     private final Logger logger = LogManager.getRootLogger();
 
 

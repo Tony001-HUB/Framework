@@ -6,10 +6,11 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import service.TestDataReader;
 
 public class AddProductToCartPage extends AbstractPage {
 
-    private static final String HomeForm_URL = "https://store.canon.ru/fotokamera-dlja-mgnovennoj-pechati-zoemini-c-cvet-fuksija.html";
+    private static final String AddingCameraСart_URL = TestDataReader.getTestData("test.data.AddingCameraСart.link");
     private final Logger logger = LogManager.getRootLogger();
 
     @FindBy(xpath="/html/body/div[3]/main/div[3]/div/div[2]/div[4]/div[1]/div[1]/div[1]/form/div[2]/div/div/div[2]/button/span")
@@ -23,7 +24,7 @@ public class AddProductToCartPage extends AbstractPage {
     @Override
     public AddProductToCartPage openPage()
     {
-        driver.get(HomeForm_URL);
+        driver.get(AddingCameraСart_URL);
         return this;
     }
 

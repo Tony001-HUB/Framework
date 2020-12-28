@@ -6,11 +6,12 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import service.TestDataReader;
 
 import java.util.concurrent.TimeUnit;
 
 public class DeleteProductFromCartPage extends AbstractPage {
-    private static final String HomeForm_URL = "https://store.canon.ru/fotokamera-dlja-mgnovennoj-pechati-zoemini-c-cvet-fuksija.html";
+    private static final String DeleteCameraFromСart_URL = TestDataReader.getTestData("test.data.DeleteCameraFromСart.link");
     private final Logger logger = LogManager.getRootLogger();
 
     @FindBy(xpath="/html/body/div[3]/header/div[3]/div[5]/div[2]/a/div/div")
@@ -30,7 +31,7 @@ public class DeleteProductFromCartPage extends AbstractPage {
     @Override
     public DeleteProductFromCartPage openPage()
     {
-        this.driver.get(HomeForm_URL);
+        this.driver.get(DeleteCameraFromСart_URL);
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         return this;
     }

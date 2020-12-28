@@ -8,10 +8,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import service.TestDataReader;
 
 public class HomePage extends AbstractPage{
 
-    private static final String HomeForm_URL = "https://canon.ru";
+    private static final String HomeForm_URL = TestDataReader.getTestData("test.data.HomeForm.link");
     private final Logger logger = LogManager.getRootLogger();
 
     @FindBy(id="_evidon-accept-button")
