@@ -11,6 +11,12 @@ public class ProductComparisonPage {
 
     private WebDriver driver;
 
+    @FindBy(xpath="//*[@id=\"product-comparison\"]/thead/tr/td[1]/a")
+    private WebElement deleteProductButton;
+
+    @FindBy(xpath="/html/body/div[4]/aside[2]/div[2]/footer/button[2]")
+    private WebElement agreeWithDeleteProductButton;
+
     @FindBy(className = "product-item-photo")
     private List<WebElement> generalSearchResult;
 
@@ -19,6 +25,13 @@ public class ProductComparisonPage {
     {
         this.driver = driver;
         PageFactory.initElements(this.driver, this);
+    }
+
+    public ProductComparisonPage deleteProduct()
+    {
+        deleteProductButton.click();
+        agreeWithDeleteProductButton.click();
+        return this;
     }
 
     public int countGeneralNumberOfSearchResults()

@@ -98,7 +98,7 @@ public class Tests extends CommonConditions
         ;
     }
 
-    @Test
+    //@Test(priority = 9)
     public void productsComparison()
     {
         int expectedSearchResult = new AddToCompareTwoProductsPage(driver)
@@ -107,6 +107,22 @@ public class Tests extends CommonConditions
                 .openPageSecondItem()
                 .addingCompareSecondProduct()
                 .openProductComparisonPage()
+                .countGeneralNumberOfSearchResults()
+                ;
+
+        Assert.assertTrue(expectedSearchResult > 0, "search result are empty!");
+    }
+
+    @Test(priority = 10)
+    public void deleteProductsComparisonFromList()
+    {
+        int expectedSearchResult = new AddToCompareTwoProductsPage(driver)
+                .openPageFirstItem()
+                .addingCompareFirstProduct()
+                .openPageSecondItem()
+                .addingCompareSecondProduct()
+                .openProductComparisonPage()
+                .deleteProduct()
                 .countGeneralNumberOfSearchResults()
                 ;
 
