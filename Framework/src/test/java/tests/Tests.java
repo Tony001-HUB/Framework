@@ -13,13 +13,8 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class Tests extends CommonConditions
 {
-    //CD /Framework
-    //mvn -Dbrowser=chrome -Denvironment=CommonToAllTests -Dsurefire.suiteXmlFiles=src\test\resources\testng-all clean test
-    //mvn -Dbrowser=gecko -Denvironment=CommonToAllTests -Dsurefire.suiteXmlFiles=src\test\resources\testng-all clean test
-    //mvn -Dbrowser=chrome -Denvironment=InvalidPassword -Dsurefire.suiteXmlFiles=src\test\resources\testng-all clean test
-    //chcp 1251
 
-    //@Test(priority = 1)
+    @Test(priority = 1)
     public void registrationWithLowLimitSymbols()
     {
         User user = UserCreator.WithLowLimitSymbols();
@@ -39,7 +34,7 @@ public class Tests extends CommonConditions
         assertThat(homePage.getRegMessage()).isEqualTo("Введите 7 или больше символов");
     }
 
-    @Test(priority = 1)
+    @Test(priority = 2)
     public void failedLogin()
     {
         User user = UserCreator.InvalidPassword();
