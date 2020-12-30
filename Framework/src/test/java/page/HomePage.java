@@ -1,20 +1,16 @@
 package page;
 
 import driver.DriverSingleton;
-import model.Product;
 import model.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import service.TestDataReader;
 
 public class HomePage extends AbstractPage{
-    //*[@id="authorizationPopupContainer"]/[@type="submit"]
-//loginPassword
-//*[@class="header-top-links__link js-authorization-link"]
+
 
     private static final String HomeForm_URL = TestDataReader.getTestData("test.data.HomeForm.link");
     private final Logger logger = LogManager.getRootLogger();
@@ -41,12 +37,6 @@ public class HomePage extends AbstractPage{
     @FindBy(id = "loginPassword")
     private WebElement logPassword;
 
-    @FindBy(id="_evidon-accept-button")
-    private WebElement agreeSiteRulesButton;
-
-    @FindBy(id="nav__search-form-input")
-    private WebElement inputSearch;
-
     @FindBy(xpath = "//*[@class=\"header-top-links__link js-authorization-link\"]")
     private WebElement clickLogIn;
 
@@ -56,14 +46,8 @@ public class HomePage extends AbstractPage{
     @FindBy(xpath = "//*[@id=\"authorizationPopupContainer\"]/div/div[1]/form/div[4]")
     private WebElement loginError;
 
-    @FindBy(xpath = "//*[@id=\"main-header\"]/nav/div[3]/div/div[2]/button/span[1]/i")
-    private WebElement activateButtonSearch;
-
     @FindBy(xpath = "//*[@id=\"search_mini_form\"]/div[2]/button")
     private WebElement clickButtonSearch;
-
-    @FindBy(xpath="//*[@id=\"groupMenu\"]/li[1]/a/span/span")
-    private WebElement goToCamerasButton;
 
     @FindBy(xpath="//*[@type=\"submit\"]")
     private WebElement submitButton;
@@ -74,9 +58,6 @@ public class HomePage extends AbstractPage{
     @FindBy(xpath="//*[@id=\"authorizationPopupContainer\"]/div/div[2]/div[2]")
     private WebElement checkRegLocation;
 
-
-
-
     public HomePage()
     {
         super(DriverSingleton.getDriver());
@@ -86,26 +67,6 @@ public class HomePage extends AbstractPage{
     {
         driver.get(HomeForm_URL);
         return this;
-    }
-
-    public SpecificSearchResultsPage searchForTerms(Product product)
-    {
-        agreeSiteRulesButton.click();
-        activateButtonSearch.click();
-        waitForElementToBeClickable(this.driver, By.xpath("//*[@id=\"nav__search-form-input\"]"));
-        inputSearch.sendKeys(product.getProductName());
-        inputSearch.sendKeys(Keys.ENTER);
-        logger.error("Successful product search");
-
-        return new SpecificSearchResultsPage();
-    }
-
-    public TestingSearchOptionsPage searchByOptions()
-    {
-        goToCamerasButton.click();
-        logger.error("Go to cameras products");
-
-        return new TestingSearchOptionsPage();
     }
 
     public HomePage openRegistrationForm()

@@ -23,6 +23,9 @@ public class DeleteProductFromCartPage extends AbstractPage {
     @FindBy(xpath="/html/body/div[3]/main/div[3]/div/div[2]/div[4]/div[1]/div[1]/div[1]/form/div[2]/div/div/div[2]/button/span")
     private WebElement addToCartButton;
 
+    @FindBy(xpath="//*[@id=\"minicartContentWrapper\"]/div/strong/span")
+    private WebElement checkCartIsEmpty ;
+
     public DeleteProductFromCartPage()
     {
         super(DriverSingleton.getDriver());
@@ -53,5 +56,7 @@ public class DeleteProductFromCartPage extends AbstractPage {
 
         return this;
     }
+
+    public String getCartMessage(){ return checkCartIsEmpty.getText(); }
 
 }

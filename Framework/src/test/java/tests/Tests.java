@@ -8,6 +8,8 @@ import page.*;
 import service.ProductCreator;
 import service.UserCreator;
 
+import java.io.UnsupportedEncodingException;
+
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 
@@ -19,9 +21,8 @@ public class Tests extends CommonConditions
     //mvn -Dbrowser=chrome -Denvironment=InvalidPassword -Dsurefire.suiteXmlFiles=src\test\resources\testng-all clean test
     //chcp 1251
 
-    //@Test(priority = 1)
-    public void registrationWithLowLimitSymbols()
-    {
+    @Test(priority = 1)
+    public void registrationWithLowLimitSymbols() throws UnsupportedEncodingException {
         User user = UserCreator.WithLowLimitSymbols();
         HomePage homePage = new HomePage()
                 .openPage()
@@ -31,11 +32,12 @@ public class Tests extends CommonConditions
                 .inputRegLogin(user)
                 .inputRegPassword(user)
                 ;
-
-        String currentUrl= "https://store.canon.ru/#";
+        
+        String currentUrl= "https://store.canon.ru";
+        String registrationText = "Регистрация";
 
         assertThat(homePage.getCurrentUrl()).isEqualTo(currentUrl);
-        assertThat(homePage.getRegLocation()).isEqualTo("Регистрация");
+        assertThat(homePage.getRegLocation()).isEqualTo(registrationText);
         assertThat(homePage.getRegMessage()).isEqualTo("Введите 7 или больше символов");
     }
 
@@ -61,10 +63,10 @@ public class Tests extends CommonConditions
     public void searchByModelName()
     {
         Product productName = ProductCreator.EnterProductName();
-        int expectedSearchResult = new HomePage()
+        int expectedSearchResult = new SpecificSearchResultsPage()
         .openPage()
         .searchForTerms(productName)
-        .countGeneralNumberOfSearchResults();
+        .countGeneralNumberOfSpecificSearchResults();
 
         Assert.assertTrue(expectedSearchResult > 0, "search result are empty!");
     }
@@ -83,25 +85,27 @@ public class Tests extends CommonConditions
     @Test(priority = 5)
     public void deletingFromShoppingCart()
     {
-        new DeleteProductFromCartPage()
+        DeleteProductFromCartPage deleteProductFromCartPage = new DeleteProductFromCartPage()
                 .openPage()
                 .deleteProductFromCart();
+
+        assertThat(deleteProductFromCartPage.getCartMessage()).isEqualTo("В Вашей корзине нет товаров.");
     }
 
     @Test(priority = 6)
     public void TestingPerformanceFilterSearch()
     {
-        int expectedSearchResult = new HomePage()
+        int expectedSearchResult = new SpecificSearchResultsPage()
                 .openPage()
                 .searchByOptions()
                 .selectionByPrice()
                 .selectionByDestination()
-                .countGeneralNumberOfSearchResults();
+                .countGeneralNumberOfSearchOptionsResults();
 
         Assert.assertTrue(expectedSearchResult > 0, "search result are empty!");
     }
 
-    //wait.until(stalenessOf(switchPriceDescendingOrderButton));
+
     @Test(priority = 7)
     public void checkingSerialNumber()
     {
