@@ -17,12 +17,7 @@ public class Tests extends CommonConditions
 {
 
     @Test(priority = 1)
-<<<<<<< HEAD
     public void registrationWithLowLimitSymbols() throws UnsupportedEncodingException {
-=======
-    public void registrationWithLowLimitSymbols()
-    {
->>>>>>> 68364292f3002b6650af0b113c88ba88b453d3c8
         User user = UserCreator.WithLowLimitSymbols();
         HomePage homePage = new HomePage()
                 .openPage()
@@ -32,21 +27,16 @@ public class Tests extends CommonConditions
                 .inputRegLogin(user)
                 .inputRegPassword(user)
                 ;
-<<<<<<< HEAD
         
         String currentUrl= "https://store.canon.ru";
         String registrationText = "Регистрация";
-=======
-
-        String currentUrl= "https://store.canon.ru";
->>>>>>> 68364292f3002b6650af0b113c88ba88b453d3c8
 
         assertThat(homePage.getCurrentUrl()).isEqualTo(currentUrl);
         assertThat(homePage.getRegLocation()).isEqualTo(registrationText);
         assertThat(homePage.getRegMessage()).isEqualTo("Введите 7 или больше символов");
     }
 
-    @Test(priority = 2)
+    @Test(priority = 1)
     public void failedLogin()
     {
         User user = UserCreator.InvalidPassword();
