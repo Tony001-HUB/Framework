@@ -27,7 +27,7 @@ public class Tests extends CommonConditions
                 .inputRegPassword(user)
                 ;
 
-        String currentUrl= "https://store.canon.ru/#";
+        String currentUrl= "https://store.canon.ru";
 
         assertThat(homePage.getCurrentUrl()).isEqualTo(currentUrl);
         assertThat(homePage.getRegLocation()).isEqualTo("Регистрация");
