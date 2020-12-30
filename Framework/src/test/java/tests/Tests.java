@@ -19,28 +19,42 @@ public class Tests extends CommonConditions
     //mvn -Dbrowser=chrome -Denvironment=InvalidPassword -Dsurefire.suiteXmlFiles=src\test\resources\testng-all clean test
     //chcp 1251
 
-    @Test(priority = 1)
+    //@Test(priority = 1)
     public void registrationWithLowLimitSymbols()
     {
-        User userWithInvalidPassword = UserCreator.WithLowLimitSymbols();
-        new RegistrationPage()
-        .openPage()
-        .userRegistration(userWithInvalidPassword)
-        .checkErrorMessage();
+        User user = UserCreator.WithLowLimitSymbols();
+        HomePage homePage = new HomePage()
+                .openPage()
+                .openRegistrationForm()
+                .inputRegFirstname(user)
+                .inputRegLastname(user)
+                .inputRegLogin(user)
+                .inputRegPassword(user)
+                ;
 
-        //assertThat(registrationPage.checkErrorMessage()).isEqualTo("Пароль должен включать не менее 8 знаков и может содержать буквы латинского алфавита, цифры и следующие символы ! \" # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _ ` { | } ~");
+        String currentUrl= "https://store.canon.ru/#";
+
+        assertThat(homePage.getCurrentUrl()).isEqualTo(currentUrl);
+        assertThat(homePage.getRegLocation()).isEqualTo("Регистрация");
+        assertThat(homePage.getRegMessage()).isEqualTo("Введите 7 или больше символов");
     }
 
-    @Test(priority = 2)
+    @Test(priority = 1)
     public void failedLogin()
     {
-        User userInvalidPassword = UserCreator.InvalidPassword();
-        String errorMessage = new LoginPage()
-        .openPage()
-        .userLogin(userInvalidPassword)
-        .checkErrorMessage();
+        User user = UserCreator.InvalidPassword();
+        HomePage homePage = new HomePage()
+                .openPage()
+                .openLoginForm()
+                .inputLogin(user)
+                .inputPassword(user)
+                .submitButtonClick();
 
-        //assertThat(errorMessage.checkErrorMessage()).isEqualTo("Неправильный адрес электронной почты или пароль");
+        String currentUrl= "https://store.canon.ru/#";
+
+        assertThat(homePage.getCurrentUrl()).isEqualTo(currentUrl);
+        assertThat(homePage.getLoginLocation()).isEqualTo("Вход");
+        assertThat(homePage.getLoginMessage()).isEqualTo("Неверный логин или пароль.");
     }
 
     @Test(priority = 3)
@@ -92,30 +106,29 @@ public class Tests extends CommonConditions
     public void checkingSerialNumber()
     {
         Product product = ProductCreator.EnterProductNameAndSerialNumber();
-        String serialNumberInformation = new SerialNumberVerificationPage()
+        SerialNumberVerificationPage serialNumberInformation = new SerialNumberVerificationPage()
                 .openPage()
                 .fillingDataModel(product)
-                .checkVerificationMessage();
+                ;
 
-        //assertThat(serialNumberInformation.checkVerificationMessage()).isEqualTo("По вашей покупке требуется дополнительная проверка. Свяжетесь, пожалуйста, с центром поддержки клиентов компании Canon через веб-форму для отправки сообщений.");
+        assertThat(serialNumberInformation.checkVerificationMessage()).isEqualTo("По вашей покупке требуется дополнительная проверка. Свяжетесь, пожалуйста, с центром поддержки клиентов компании Canon через веб-форму для отправки сообщений.");
     }
 
     @Test(priority = 8)
     public void getPromoCodeWithoutRequiredField()
     {
-       String errorMessage = new GettingFellPromoCodePage()
+        GettingFellPromoCodePage errorMessage = new GettingFellPromoCodePage()
                 .openPage()
                 .gettingPromoCode()
-                .checkErrorMessage()
         ;
 
-        //assertThat(errorMessage.checkErrorMessage()).isEqualTo("Данная электронная почта уже используется");
+        assertThat(errorMessage.checkErrorMessage()).isEqualTo("Данная электронная почта уже используется");
     }
 
     @Test(priority = 9)
     public void productsComparison()
     {
-        int expectedSearchResult = new AddToCompareTwoProductsPage()
+        int expectedSearchResult = new AddToCompareProductsPage()
                 .openPage()
                 .addingCompareFirstProduct()
                 .openPageSecondItem()
@@ -130,7 +143,7 @@ public class Tests extends CommonConditions
     @Test(priority = 10)
     public void deleteProductsComparisonFromList()
     {
-        int expectedSearchResult = new AddToCompareTwoProductsPage()
+        int expectedSearchResult = new AddToCompareProductsPage()
                 .openPage()
                 .addingCompareFirstProduct()
                 .openPageSecondItem()
