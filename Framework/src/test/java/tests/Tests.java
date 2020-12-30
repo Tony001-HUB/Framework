@@ -15,14 +15,14 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class Tests extends CommonConditions
 {
-    //CD /Framework
-    //mvn -Dbrowser=chrome -Denvironment=CommonToAllTests -Dsurefire.suiteXmlFiles=src\test\resources\testng-all clean test
-    //mvn -Dbrowser=gecko -Denvironment=CommonToAllTests -Dsurefire.suiteXmlFiles=src\test\resources\testng-all clean test
-    //mvn -Dbrowser=chrome -Denvironment=InvalidPassword -Dsurefire.suiteXmlFiles=src\test\resources\testng-all clean test
-    //chcp 1251
 
     @Test(priority = 1)
+<<<<<<< HEAD
     public void registrationWithLowLimitSymbols() throws UnsupportedEncodingException {
+=======
+    public void registrationWithLowLimitSymbols()
+    {
+>>>>>>> 68364292f3002b6650af0b113c88ba88b453d3c8
         User user = UserCreator.WithLowLimitSymbols();
         HomePage homePage = new HomePage()
                 .openPage()
@@ -32,16 +32,21 @@ public class Tests extends CommonConditions
                 .inputRegLogin(user)
                 .inputRegPassword(user)
                 ;
+<<<<<<< HEAD
         
         String currentUrl= "https://store.canon.ru";
         String registrationText = "Регистрация";
+=======
+
+        String currentUrl= "https://store.canon.ru";
+>>>>>>> 68364292f3002b6650af0b113c88ba88b453d3c8
 
         assertThat(homePage.getCurrentUrl()).isEqualTo(currentUrl);
         assertThat(homePage.getRegLocation()).isEqualTo(registrationText);
         assertThat(homePage.getRegMessage()).isEqualTo("Введите 7 или больше символов");
     }
 
-    @Test(priority = 1)
+    @Test(priority = 2)
     public void failedLogin()
     {
         User user = UserCreator.InvalidPassword();
